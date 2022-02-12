@@ -1,0 +1,1 @@
+# This script fetches every relevant config file and copies them in the repos 
