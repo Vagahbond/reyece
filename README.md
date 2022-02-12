@@ -1,4 +1,6 @@
 # Reyece
+*This repos is WIP, so it might not be complete yet.*
+
 My first Arch rice, documented for the sole purpose of obnoxiously bragging about it on r/UnixPorn and saying "I use arch BTW" all the time.
 
 It's called this way because of the wallpaper. Yeah couldnt come up with a better name.
