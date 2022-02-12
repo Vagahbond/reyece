@@ -26,6 +26,9 @@ Its values are the following :
 8) #dbd6cf
 9) #999590
 
+### Font
+CascadiaCode
+
 ![](assets/term_colors.png)
 ### Discord
 [BetterDiscord](https://wiki.archlinux.org/title/Installation_guide) with customized [ClearVision](https://betterdiscord.app/theme/ClearVision) theme.
