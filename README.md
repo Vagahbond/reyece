@@ -7,6 +7,9 @@ I'm going to put stuff that could look obvious or dumb to general arch users, bu
 
 For information, my usual use of this computer will be for coding all kinds of things mostly, so this rice is pretty much adapted to that use.
 
+## TL:DR
+You can download a script that'll set everything up at [this link](https://www.youtube.com/watch?v=dQw4w9WgXcQ).
+
 ## Themes
 The color schemes were made using [pywal](https://github.com/dylanaraps/pywal) with the wallpaper, that can be found in the `.config` under sway config directory.
 
