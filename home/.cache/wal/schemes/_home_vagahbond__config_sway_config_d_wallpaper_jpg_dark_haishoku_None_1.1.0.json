@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/vagahbond/.config/sway/config.d/wallpaper.jpg",
+    "alpha": "100",
+    "special": {
+        "background": "#151515",
+        "foreground": "#c4c4c4",
+        "cursor": "#c4c4c4"
+    },
+    "colors": {
+        "color0": "#151515",
+        "color1": "#693c2e",
+        "color2": "#466566",
+        "color3": "#725b4d",
+        "color4": "#817e78",
+        "color5": "#bd9683",
+        "color6": "#ccb29e",
+        "color7": "#c4c4c4",
+        "color8": "#4f4f4f",
+        "color9": "#693c2e",
+        "color10": "#466566",
+        "color11": "#725b4d",
+        "color12": "#817e78",
+        "color13": "#bd9683",
+        "color14": "#ccb29e",
+        "color15": "#c4c4c4"
+    }
+}

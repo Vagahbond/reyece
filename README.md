@@ -1,5 +1,4 @@
 # Reyece
-*This repos is WIP, so it might not be complete yet.*
 
 My first Arch rice, documented for the sole purpose of obnoxiously bragging about it on r/UnixPorn and saying "I use arch BTW" all the time.
 
@@ -25,6 +24,8 @@ Its values are the following :
 7) #A0A29C
 8) #dbd6cf
 9) #999590
+
+To 
 
 ### Font
 CascadiaCode
@@ -99,3 +100,5 @@ Here are a few of the softwares I used to get the rice usable
 * [The obvious Arch installation guide](https://wiki.archlinux.org/title/Installation_guide)
 * [Another guide a talented friend of mine wrote](https://github.com/angristan/arch-linux-install)
 * [A curated list of Wayland code and resources](https://github.com/natpen/awesome-wayland#screen-locking)
+* [A guide for emoji fonts](https://dev.to/darksmile92/get-emojis-working-on-arch-linux-with-noto-fonts-emoji-2a9)
+

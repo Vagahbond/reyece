@@ -1,0 +1,396 @@
+# Default config for sway
+#
+# Copy this to ~/.config/sway/config and edit it to your liking.
+#
+# Read `man 5 sway` for a complete reference.
+
+set $background #050505
+set $foreground #dbd6cf
+
+set $color0 #050505
+set $color1 #9E4427
+set $color2 #927061
+set $color3 #A58975
+set $color4 #6C7C81
+set $color5 #6A9599
+set $color6 #A0A29C
+set $color7 #dbd6cf
+set $color8 #999590
+set $color9 #9E4427
+set $color10 #927061
+set $color11 #A58975
+set $color12 #6C7C81
+set $color13 #6A9599
+set $color14 #A0A29C
+set $color15 #dbd6cf
+
+
+set $uifont "CascadiaCode:Sans 14"
+
+# Set GTK theme (cannot set theme here or it fucks up waybar's CSS. I exported an environment variable in .zshrc instead)
+exec_always {
+    gsettings set org.gnome.desktop.interface gtk-theme 'Flat-Remix-GTK-Flat_remix_riced_v2-Darkest'
+    gsettings set org.gnome.desktop.interface icon-theme 'Zafiro-Icons-Dark'
+    # gsettings set org.gnome.desktop.interface cursor-theme 'Orchis-orange-dark'
+    gsettings set org.gnome.desktop.interface font-name 'Cascadia Code Regular 11'
+}
+
+### Variables
+#
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+set $alt Mod1
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+# Your preferred terminal emulator
+set $term alacritty
+
+# Your preferred application launcher
+# Note: pass the final command to swaymsg so that the resulting window can be opened
+# on the original workspace that the command was run on.
+
+# wofi launcher
+set $menu wofi --show=drun --line=5 --prompt=""
+
+
+#
+# Example configuration:
+#
+#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+#
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+output eDP-1 resolution 1920x1080 position 0,0
+output DP-5 resolution 3440x1440 position 1920,0
+
+# TODO: Use this command to make screen config dependant on currently plugged in screens 
+# swaymsg -t get_outputs -p | grep Output
+
+
+### Idle configuration
+#
+# Example configuration:
+#
+# exec swayidle -w \
+#          timeout 300 'swaylock -f -c 000000' \
+#          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+#          before-sleep 'swaylock -f -c 000000'
+#
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+
+exec swayidle -w \
+         timeout 300 'swaylock -f -c 000000' \
+         timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+         before-sleep 'swaylock -f -c 000000'
+
+### Input configuration
+#
+# Example configuration:
+#
+#   input "2:14:SynPS/2_Synaptics_TouchPad" {
+#       dwt enabled
+#       tap enabled
+#       natural_scroll enabled
+#       middle_emulation enabled
+#   }
+#
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+input "1267:12454:ELAN0406:00_04F3:30A6_Touchpad" {
+    dwt enabled
+    tap enabled
+    natural_scroll enabled
+    middle_emulation enabled
+}
+
+#
+# Keyboard layout:
+#
+# This keyboard allows me to use accents such as é à ç ê on a qwerty keyboard
+input * {
+    xkb_layout "us"
+    xkb_variant "mac"
+    # xkb_options "ctrl:rctrl_ralt" non functionnal 
+}
+
+### Key bindings
+#
+# Basics:
+#
+    # Start a terminal
+    bindsym $mod+Return exec $term
+
+    # Kill focused window
+    bindsym $mod+Shift+q kill
+
+    # Start your launcher
+    bindsym Alt+Space exec $menu
+
+    # Start file explorer
+    bindsym $mod+e exec thunar
+
+    # Take screenshots
+    bindsym Print exec grim ~/Pictures/Screenshots/$(date +'%s_grim.png')
+
+    # take a screenshot of a window
+    bindsym Alt+Print exec /home/vagahbond/.config/sway/window_screenshot.sh
+    # bindsym Print+$mod exec swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp -c "#94381eAA" -b "#00242b88" 
+
+    # take screenshot of a zone
+    bindsym Shift+Print exec grim -g "$(slurp -c '#94381eAA' -b '#00242b88')" ~/Pictures/Screenshots/$(date +'%s_grim.png')
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+    # Reload the configuration file
+    bindsym $mod+Shift+c reload
+
+    # Exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
+    # Clip
+    exec wl-paste -t text --watch clipman store
+    exec wl-paste -p -t text --watch clipman store -P --histpath="~/.local/share/clipman-primary.json"
+    bindsym $mod+h exec clipman pick -t wofi
+
+#
+# Moving around:
+#
+    # Move your focus around
+    # bindsym $mod+$left focus left
+    # bindsym $mod+$down focus down
+    # bindsym $mod+$up focus up
+    # bindsym $mod+$right focus right
+    # Or use $mod+[up|down|left|right]
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+    # Move the focused window with the same, but add Shift
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+    # Ditto, with arrow keys
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+#
+# Workspaces:
+#
+    # Switch to workspace
+    bindsym $mod+1 workspace number 1
+    bindsym $mod+2 workspace number 2
+    bindsym $mod+3 workspace number 3
+    bindsym $mod+4 workspace number 4
+    bindsym $mod+5 workspace number 5
+    bindsym $mod+6 workspace number 6
+    bindsym $mod+7 workspace number 7
+    bindsym $mod+8 workspace number 8
+    bindsym $mod+9 workspace number 9
+    bindsym $mod+0 workspace number 10
+    # Move focused container to workspace
+    bindsym $mod+Shift+1 move container to workspace number 1
+    bindsym $mod+Shift+2 move container to workspace number 2
+    bindsym $mod+Shift+3 move container to workspace number 3
+    bindsym $mod+Shift+4 move container to workspace number 4
+    bindsym $mod+Shift+5 move container to workspace number 5
+    bindsym $mod+Shift+6 move container to workspace number 6
+    bindsym $mod+Shift+7 move container to workspace number 7
+    bindsym $mod+Shift+8 move container to workspace number 8
+    bindsym $mod+Shift+9 move container to workspace number 9
+    bindsym $mod+Shift+0 move container to workspace number 10
+    # Note: workspaces can have any name you want, not just numbers.
+    # We just use 1-10 as the default.
+
+    # Move focus to next workspace
+
+    set $next_or_new swaymsg -r -t get_workspaces | jq -r --arg OUTPUT $(swaymsg -t get_outputs -r | jq -r '.[] | select(.focused == true) | .name') '(. | (max_by(.num) | .num)) as $max | [.[] | select(.output == $OUTPUT)] | (max_by(.num) | .num) as $maxOutput | (.[] | select(.focused == true) | .num) as $current | if $maxOutput > $current then "next_on_output" else $max + 1 end'
+    set $previous_or_first swaymsg -r -t get_workspaces | jq -r --arg OUTPUT $(swaymsg -t get_outputs -r | jq -r '.[] | select(.focused == true) | .name') '(. | (max_by(.num) | .num)) as $max | [.[] | select(.output == $OUTPUT)] | (min_by(.num) | .num) as $minOutput | (.[] | select(.focused == true) | .num) as $current | if $minOutput < $current then "prev_on_output" else $current end'
+
+    bindsym Alt+Right exec swaymsg "workspace $($next_or_new)"
+    bindsym Alt+Left exec swaymsg "workspace $($previous_or_first)"
+
+    bindsym Alt+Shift+Right exec swaymsg "move container to workspace $($next_or_new), workspace next_on_output"
+    bindsym Alt+Shift+Left exec swaymsg "move container to workspace $($previous_or_first), workspace prev_on_output"
+#
+# Layout stuff:
+#
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    bindsym $mod+b splith
+    bindsym $mod+v splitv
+
+    # Switch the current container between different layout styles
+    bindsym $mod+s layout stacking
+    bindsym $mod+w layout tabbed
+    bindsym $mod+t layout toggle split
+
+    # Make the current focus fullscreen
+    bindsym $mod+f fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+Shift+space floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    bindsym $mod+space focus mode_toggle
+
+    # Move focus to the parent container
+    bindsym $mod+a focus parent
+#
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+minus move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+minus scratchpad show
+
+#
+# Keyboard macros:
+#
+    # brightness adjustments
+    set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
+    exec mkfifo $WOBSOCK && tail -f $WOBSOCK | wob 
+
+    bindsym XF86MonBrightnessUp exec light -A 5 && light -G | cut -d'.' -f1 > $WOBSOCK
+    bindsym XF86MonBrightnessDown exec light -U 5 && light -G | cut -d'.' -f1 > $WOBSOCK
+
+    # volume adjustments
+    # Command to get current volume 
+    set $current_volume amixer get Master | grep -P '\d[0-9]{1,3}%' -o | cut -d'%' -f1 | tail -n 1
+    bindsym XF86AudioMute exec amixer -D pulse sset Master 1+ toggle
+    bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%- && exec $current_volume > $WOBSOCK
+    bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+ && exec $current_volume > $WOBSOCK
+
+    # media player
+    bindsym XF86AudioPlay exec playerctl play
+    bindsym XF86AudioPause exec playerctl pause
+    bindsym XF86AudioNext exec playerctl next
+    bindsym XF86AudioPrev exec playerctl previous
+
+#
+# Resizing containers:
+#
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+
+    # Ditto, with arrow keys
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+#
+# Lock screen
+#
+bindsym Alt+l exec swaylock --screenshots --clock --indicator --indicator-radius 100 --indicator-thickness 7 --effect-blur 7x5 --effect-vignette 0.5:0.5 --ring-color bb00cc --key-hl-color 880033 --line-color 00000000 --inside-color 00000088 --separator-color 00000000 --grace 2 --fade-in 0.2
+
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+bar {
+    position top
+    font $uifont
+    swaybar_command waybar
+
+    # When the status_command prints a new line to stdout, swaybar updates.
+    # The default just shows the current date and time.
+#    status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
+
+#    colors {
+#        statusline #ffffff
+#        background #323232
+#        inactive_workspace #32323200 #32323200 #5c5c5c
+#    }
+}
+
+
+# 10 px gap around any window
+gaps inner 10
+smart_gaps on
+
+# class                 border  backgr. text    indicator child_border
+client.focused          #6A9599 #000000 #ffffff #A58975   #A58975
+client.focused_inactive #A58975 #000000 #ffffff #A58975   #050505
+client.unfocused        #6A9599 #000000 #888888 #A58975   #050505
+client.urgent           #A58975 #000000 #ffffff #A58975   #6A9599
+client.placeholder      #6A9599 #000000 #ffffff #A58975   #6A9599
+
+# Window borders
+default_border pixel 1
+default_floating_border normal
+hide_edge_borders smart
+
+hide_edge_borders smart
+
+# Autostart
+# exec --no-startup-id mako
+# exec --no-startup-id redshift -c ~/.config/redshift/config
+# exec mailspring
+# exec spotify
+# exec riot
+# exec --no-startup-id nextcloud
+# exec --no-startup-id libinput-gestures
+
+# Default workspaces for common programs
+# assign [class="^Chromium$"] $ws1
+# # assign [class="^code-oss$"] $ws2
+# assign [class="^Signal$"] $wsF1
+# assign [class="^Riot$"] $wsF1
+# assign [class="^Mailspring$"] $wsF2
+# assign [app_id="virt-manager"] $wsF8
+# assign [class="^KeePass2$"] $wsF11
+# assign [class="^Spotify$"] $wsF12
+
+
+# set $mode_system System: (l) lock, (e) logout, (s) suspend, (r) reboot, (S) shutdown, (R) UEFI
+# mode "$mode_system" {
+#     bindsym l exec $lock, mode "default"
+#     bindsym e exit
+#     bindsym s exec --no-startup-id systemctl suspend, mode "default"
+#     bindsym r exec --no-startup-id systemctl reboot, mode "default"
+#     bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+#     bindsym Shift+r exec --no-startup-id systemctl reboot --firmware-setup, mode "default"
+
+#     # return to default mode
+#     bindsym Return mode "default"
+#     bindsym Escape mode "default"
+# }
+# bindsym $mod+Shift+e mode "$mode_system"
+
+
+include ~/.config/sway/config.d/*.conf
+include /etc/sway/config.d/*
+
+

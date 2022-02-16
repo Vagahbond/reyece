@@ -1,0 +1,15 @@
+{
+    "version": "1.5.2",
+    "emoteVersion": "v1.5.1",
+    "drawerStates": {
+        "settings": {
+            "addons": true,
+            "customcss": true,
+            "window": true,
+            "developer": true
+        }
+    },
+    "favoriteEmotes": {
+        "LOURD": "https://cdn.frankerfacez.com/emoticon/174289/1"
+    }
+}

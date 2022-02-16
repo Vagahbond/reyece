@@ -1,0 +1,23 @@
+/**
+* @name Anime Snowy Desert
+* @version 1
+* @description A simplistic and scenic anime discord theme, containing a desert covered with a fresh layer of snow.This theme is compatible with Better Discord.
+* @author discordthemes
+* @website discordthemes.io
+*/
+@import url("https://codedotspectra.github.io/themes/themes-cores/neutron8.css");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans');
+:root {
+--themeColor1: #DC7B24FF;
+--themeColor2: #DC7B24FF;
+--customFont: 'Open Sans';
+--homeImage: url('https://i.imgur.com/OrbFscy.jpg');
+--homeImageSize: cover;
+--backgroundColor: #0d0d0d;
+--backgroundImage: url('https://i.imgur.com/0TInY6z.jpg');
+--backgroundPosition: center;
+--backgroundSize: cover;
+--backgroundRepeat: no-repeat;
+--backgroundBlur: 0px;
+--backgroundOpacity: 0.4;
+}

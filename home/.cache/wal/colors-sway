@@ -1,0 +1,21 @@
+set $wallpaper /home/vagahbond/.config/sway/config.d/wallpaper.jpg
+
+set $background #050505
+set $foreground #dbd6cf
+
+set $color0 #050505
+set $color1 #9E4427
+set $color2 #927061
+set $color3 #A58975
+set $color4 #6C7C81
+set $color5 #6A9599
+set $color6 #A0A29C
+set $color7 #dbd6cf
+set $color8 #999590
+set $color9 #9E4427
+set $color10 #927061
+set $color11 #A58975
+set $color12 #6C7C81
+set $color13 #6A9599
+set $color14 #A0A29C
+set $color15 #dbd6cf
