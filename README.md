@@ -39,7 +39,11 @@ CascadiaCode
 
 ### GTK Theme 
 [Flat remix](https://github.com/daniruiz/Flat-Remix-GTK) with a custom color theme compiled thanks to their utility. 
+Theme files can be found under `usr/share/theme/`.
 
+### Icons Theme
+[Zafiro-Icons-Dark]()
+Icon files can be found under `usr/share/icons`
 ### Firefox/Duckduckgo and thunderbird theme : 
 [PywalFox](https://github.com/Frewacom/pywalfox)  is used as a local utility and an extension for Firefox and Thunderbird. It uses the last cached values from wal.
 

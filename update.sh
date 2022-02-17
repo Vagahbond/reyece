@@ -52,3 +52,32 @@ done
 echo "Fixing home directory root files permissions..."
 chown $USER -R ./home
 chmod +rw -R ./home
+
+
+# Files in root of home directory
+ROOT_DOTFILES=(
+    .oh-my-zsh/themes/reyece.zsh-theme
+    .cache/wal
+)
+
+
+## Copy GTK theme
+echo "Copying gtk theme"
+
+THEME="Flat-Remix-GTK-Flat_remix_reyece-Darkest"
+
+mkdir -p "./usr/share/themes/$THEME" 
+cp -r "/usr/share/themes/$THEME" "./usr/share/themes/$THEME"
+
+
+## Copy icons theme
+echo "Copying icons theme"
+
+THEME="Zafiro-Icons-Dark"
+
+mkdir -p "./usr/share/icons/$THEME" 
+cp -r "/usr/share/icons/$THEME" "./usr/share/icons/$THEME"
+
+# Fix permissions for next execution to be less cumbersome
+echo "Fixing home directory thene files permissions..."
+chown $USER -R ./usr/*
