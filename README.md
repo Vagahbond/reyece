@@ -8,6 +8,21 @@ I'm going to put stuff that could look obvious or dumb to general arch users, bu
 
 For information, my usual use of this computer will be for coding all kinds of things mostly, so this rice is pretty much adapted to that use.
 
+## Screenshots
+
+### Empty
+![](assets/empty.png)
+### Discord, Firefox, Wofi
+![](assets/discord_fox_wofi.png)
+
+### Neofetch, VSCode
+![](assets/neofetch.png)
+
+### Spotify, Thunar
+![](assets/spotify_thunar.png)
+
+
+
 ## TL:DR
 You can download a script that'll set everything up at [this link](https://www.youtube.com/watch?v=dQw4w9WgXcQ).
 
@@ -42,7 +57,7 @@ CascadiaCode
 Theme files can be found under `usr/share/theme/`.
 
 ### Icons Theme
-[Zafiro-Icons-Dark]()
+[Zafiro-Icons-Dark](https://www.opendesktop.org/s/Gnome/p/1209330/)
 Icon files can be found under `usr/share/icons`
 ### Firefox/Duckduckgo and thunderbird theme : 
 [PywalFox](https://github.com/Frewacom/pywalfox)  is used as a local utility and an extension for Firefox and Thunderbird. It uses the last cached values from wal.
