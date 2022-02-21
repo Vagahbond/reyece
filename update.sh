@@ -16,6 +16,7 @@ CONFIG_DOTFILES=(
     spicetify/config-xpui.ini 
     waybar
     alacritty
+    libinput-gestures.conf
 )
 
 ## Copy relevant files from .config

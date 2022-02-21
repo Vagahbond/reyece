@@ -29,7 +29,7 @@ set $uifont "CascadiaCode:Sans 14"
 
 # Set GTK theme (cannot set theme here or it fucks up waybar's CSS. I exported an environment variable in .zshrc instead)
 exec_always {
-    gsettings set org.gnome.desktop.interface gtk-theme 'Flat-Remix-GTK-Flat_remix_riced_v2-Darkest'
+    gsettings set org.gnome.desktop.interface gtk-theme 'Flat-Remix-GTK-Flat_remix_reyece-Darkest'
     gsettings set org.gnome.desktop.interface icon-theme 'Zafiro-Icons-Dark'
     # gsettings set org.gnome.desktop.interface cursor-theme 'Orchis-orange-dark'
     gsettings set org.gnome.desktop.interface font-name 'Cascadia Code Regular 11'
@@ -218,8 +218,9 @@ input * {
     set $next_or_new swaymsg -r -t get_workspaces | jq -r --arg OUTPUT $(swaymsg -t get_outputs -r | jq -r '.[] | select(.focused == true) | .name') '(. | (max_by(.num) | .num)) as $max | [.[] | select(.output == $OUTPUT)] | (max_by(.num) | .num) as $maxOutput | (.[] | select(.focused == true) | .num) as $current | if $maxOutput > $current then "next_on_output" else $max + 1 end'
     set $previous_or_first swaymsg -r -t get_workspaces | jq -r --arg OUTPUT $(swaymsg -t get_outputs -r | jq -r '.[] | select(.focused == true) | .name') '(. | (max_by(.num) | .num)) as $max | [.[] | select(.output == $OUTPUT)] | (min_by(.num) | .num) as $minOutput | (.[] | select(.focused == true) | .num) as $current | if $minOutput < $current then "prev_on_output" else $current end'
 
-    bindsym Alt+Right exec swaymsg "workspace $($next_or_new)"
-    bindsym Alt+Left exec swaymsg "workspace $($previous_or_first)"
+    bindsym Alt+Right exec /home/vagahbond/.config/sway/navigate_workspaces_right.sh
+    bindsym Alt+Left exec /home/vagahbond/.config/sway/navigate_workspaces_left.sh
+
 
     bindsym Alt+Shift+Right exec swaymsg "move container to workspace $($next_or_new), workspace next_on_output"
     bindsym Alt+Shift+Left exec swaymsg "move container to workspace $($previous_or_first), workspace prev_on_output"
@@ -341,17 +342,15 @@ gaps inner 10
 smart_gaps on
 
 # class                 border  backgr. text    indicator child_border
-client.focused          #6A9599 #000000 #ffffff #A58975   #A58975
-client.focused_inactive #A58975 #000000 #ffffff #A58975   #050505
-client.unfocused        #6A9599 #000000 #888888 #A58975   #050505
-client.urgent           #A58975 #000000 #ffffff #A58975   #6A9599
-client.placeholder      #6A9599 #000000 #ffffff #A58975   #6A9599
+client.focused          #A58975 #000000 #ffffff #A58975   #A58975
+client.focused_inactive #6A9599 #000000 #ffffff #A58975   #6A9599
+client.unfocused        #000000 #000000 #ffffff #A58975   #000000
+client.urgent           #6A9599 #000000 #ffffff #A58975   #6A9599
+client.placeholder      #A58975 #A58975 #A58975 #A58975   #A58975
 
 # Window borders
 default_border pixel 1
 default_floating_border normal
-hide_edge_borders smart
-
 hide_edge_borders smart
 
 # Autostart

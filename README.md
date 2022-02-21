@@ -112,6 +112,7 @@ Here are a few of the softwares I used to get the rice usable
 | Image viewer | [imv](https://github.com/eXeC64/imv) |
 | Shell | [zsh](https://www.zsh.org/) with [Oh my ZSH](https://ohmyz.sh/) |
 | Editor | nano | 
+| Touchpad gestures(zoom, workspace navigating) | [libinput-gestures](https://github.com/bulletmark/libinput-gestures) |
 
 
 
