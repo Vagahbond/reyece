@@ -21,6 +21,9 @@ For information, my usual use of this computer will be for coding all kinds of t
 ### Spotify, Thunar
 ![](assets/spotify_thunar.png)
 
+### [Pokeget](https://github.com/talwat/pokeget), Thunderbird
+![](assets/pokeget_thunderbird.png)
+
 
 
 ## TL:DR
