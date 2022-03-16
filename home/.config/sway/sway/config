@@ -62,8 +62,8 @@ set $menu wofi --show=drun --line=5 --prompt=""
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
-output eDP-1 resolution 1920x1080 position 0,0
-output DP-5 resolution 3440x1440 position 1920,0
+output eDP-1 resolution 1920x1080 position 3440,0
+output DP-5 resolution 3440x1440 position 0,0
 
 # TODO: Use this command to make screen config dependant on currently plugged in screens 
 # swaymsg -t get_outputs -p | grep Output
@@ -82,10 +82,28 @@ output DP-5 resolution 3440x1440 position 1920,0
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 
+# swaylock \
+# 	--screenshots \
+# 	--clock \
+# 	--indicator \
+# 	--indicator-radius 100 \
+# 	--indicator-thickness 7 \
+# 	--effect-blur 7x5 \
+# 	--effect-vignette 0.5:0.5 \
+# 	--ring-color bb00cc \
+# 	--key-hl-color 880033 \
+# 	--line-color 00000000 \
+# 	--inside-color 00000088 \
+# 	--separator-color 00000000 \
+# 	--grace 2 \
+# 	--fade-in 0.2
+
+set $lockCommand 'swaylock --screenshots --indicator-radius 200 --clock --ring-color "#A58975" --key-hl-color "#6A9599" --inside-color "#050505A0" --separator-color "#6A9599FF" --line-color "#050505A0" --indicator-thickness 20 --fade-in 2 --effect-vignette 0.5:0.5 --effect-blur 7x2'
+
 exec swayidle -w \
-         timeout 300 'swaylock -f -c 000000' \
+         timeout 300 exec $lockCommand  \
          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock -f -c 000000'
+         before-sleep exec $lockCommand 
 
 ### Input configuration
 #
@@ -314,7 +332,7 @@ bindsym $mod+r mode "resize"
 #
 # Lock screen
 #
-bindsym Alt+l exec swaylock --screenshots --clock --indicator --indicator-radius 100 --indicator-thickness 7 --effect-blur 7x5 --effect-vignette 0.5:0.5 --ring-color bb00cc --key-hl-color 880033 --line-color 00000000 --inside-color 00000088 --separator-color 00000000 --grace 2 --fade-in 0.2
+bindsym Alt+l exec $lockCommand
 
 #
 # Status Bar:
@@ -392,4 +410,6 @@ hide_edge_borders smart
 include ~/.config/sway/config.d/*.conf
 include /etc/sway/config.d/*
 
+# autostart libinput gestures
+exec libinput-gestures-setup start
 
