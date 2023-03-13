@@ -4,26 +4,7 @@
 #
 # Read `man 5 sway` for a complete reference.
 
-set $background #050505
-set $foreground #dbd6cf
-
-set $color0 #050505
-set $color1 #9E4427
-set $color2 #927061
-set $color3 #A58975
-set $color4 #6C7C81
-set $color5 #6A9599
-set $color6 #A0A29C
-set $color7 #dbd6cf
-set $color8 #999590
-set $color9 #9E4427
-set $color10 #927061
-set $color11 #A58975
-set $color12 #6C7C81
-set $color13 #6A9599
-set $color14 #A0A29C
-set $color15 #dbd6cf
-
+include ~/.cache/wal/colors-sway
 
 set $uifont "CascadiaCode:Sans 14"
 
@@ -62,10 +43,11 @@ set $menu wofi --show=drun --line=5 --prompt=""
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
-output eDP-1 resolution 1920x1080 position 3440,0
+output eDP-1 resolution 1920x1080 position 3440,360
+output DP-3 resolution 3440x1440 position 0,0
 output DP-5 resolution 3440x1440 position 0,0
 
-# TODO: Use this command to make screen config dependant on currently plugged in screens 
+# TODO: Use this command to make screen config dependant on currently plugged in screens
 # swaymsg -t get_outputs -p | grep Output
 
 
@@ -98,12 +80,12 @@ output DP-5 resolution 3440x1440 position 0,0
 # 	--grace 2 \
 # 	--fade-in 0.2
 
-set $lockCommand 'swaylock --screenshots --indicator-radius 200 --clock --ring-color "#A58975" --key-hl-color "#6A9599" --inside-color "#050505A0" --separator-color "#6A9599FF" --line-color "#050505A0" --indicator-thickness 20 --fade-in 2 --effect-vignette 0.5:0.5 --effect-blur 7x2'
+set $lockCommand 'swaylock --screenshots --indicator-radius 200 --clock --ring-color "$color3" --key-hl-color "$color5" --inside-color "$backgroundA0" --separator-color "$color5FF" --line-color "$backgroundA0" --indicator-thickness 20 --fade-in 2 --effect-vignette 0.5:0.5 --effect-blur 7x2'
 
 exec swayidle -w \
          timeout 300 exec $lockCommand  \
          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-         before-sleep exec $lockCommand 
+         before-sleep exec $lockCommand
 
 ### Input configuration
 #
@@ -132,7 +114,7 @@ input "1267:12454:ELAN0406:00_04F3:30A6_Touchpad" {
 input * {
     xkb_layout "us"
     xkb_variant "mac"
-    # xkb_options "ctrl:rctrl_ralt" non functionnal 
+    # xkb_options "ctrl:rctrl_ralt" non functionnal
 }
 
 ### Key bindings
@@ -156,7 +138,7 @@ input * {
 
     # take a screenshot of a window
     bindsym Alt+Print exec /home/vagahbond/.config/sway/window_screenshot.sh
-    # bindsym Print+$mod exec swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp -c "#94381eAA" -b "#00242b88" 
+    # bindsym Print+$mod exec swaymsg -t get_tree | jq -r '.. | select(.pid? and .visible?) | .rect | "\(.x),\(.y) \(.width)x\(.height)"' | slurp -c "#94381eAA" -b "#00242b88"
 
     # take screenshot of a zone
     bindsym Shift+Print exec grim -g "$(slurp -c '#94381eAA' -b '#00242b88')" ~/Pictures/Screenshots/$(date +'%s_grim.png')
@@ -285,13 +267,13 @@ input * {
 #
     # brightness adjustments
     set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
-    exec mkfifo $WOBSOCK && tail -f $WOBSOCK | wob 
+    exec mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
 
     bindsym XF86MonBrightnessUp exec light -A 5 && light -G | cut -d'.' -f1 > $WOBSOCK
     bindsym XF86MonBrightnessDown exec light -U 5 && light -G | cut -d'.' -f1 > $WOBSOCK
 
     # volume adjustments
-    # Command to get current volume 
+    # Command to get current volume
     set $current_volume amixer get Master | grep -P '\d[0-9]{1,3}%' -o | cut -d'%' -f1 | tail -n 1
     bindsym XF86AudioMute exec amixer -D pulse sset Master 1+ toggle
     bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%- && exec $current_volume > $WOBSOCK
@@ -348,7 +330,7 @@ bar {
 #    status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
 
 #    colors {
-#        statusline #ffffff
+#        statusline $foreground
 #        background #323232
 #        inactive_workspace #32323200 #32323200 #5c5c5c
 #    }
@@ -360,11 +342,11 @@ gaps inner 10
 smart_gaps on
 
 # class                 border  backgr. text    indicator child_border
-client.focused          #A58975 #000000 #ffffff #A58975   #A58975
-client.focused_inactive #6A9599 #000000 #ffffff #A58975   #6A9599
-client.unfocused        #000000 #000000 #ffffff #A58975   #000000
-client.urgent           #6A9599 #000000 #ffffff #A58975   #6A9599
-client.placeholder      #A58975 #A58975 #A58975 #A58975   #A58975
+client.focused          $color3 $background $foreground $color3   $color3
+client.focused_inactive $color5 $background $foreground $color3   $color5
+client.unfocused        $background $background $foreground $color3   $background
+client.urgent           $color5 $background $foreground $color3   $color5
+client.placeholder      $color3 $color3 $color3 $color3   $color3
 
 # Window borders
 default_border pixel 1
